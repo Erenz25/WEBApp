@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Name Submission</title>
+</head>
+<body>
+  <h2>Submit Your Name</h2>
+  <form id="nameForm">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required>
+    <br><br>
+    <input type="submit" value="Submit">
+  </form>
+
+  <script>
+    document.getElementById("nameForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+      var formData = new FormData(this);
+      fetch('https://script.google.com/macros/s/AKfycbwI35YylhXgKSfW8-vVg9cDTTwwx0mDjWrpZZoFLKuxyHKFVQcvBuhqSpU7N7R3YsLaqA/exec', {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => response.text())
+      .then(data => {
+        alert(data);
+        document.getElementById("nameForm").reset();
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        alert('There was an error submitting your name.');
+      });
+    });
+  </script>
+</body>
+</html>
